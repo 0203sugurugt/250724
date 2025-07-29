@@ -1,0 +1,436 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kurenaido&display=swap');
+
+*{
+ font-family: 'DotGothic16';
+ color: #d5d7d2;
+}
+
+/* ページ全体の初期設定 */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 200vh;
+  overflow-x: hidden;
+  align-items: center;
+}
+
+/* グリッド */
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+   background-color: #455765;
+  background-image:
+    repeating-linear-gradient(to bottom,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px, rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px, transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px, rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px, transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px, rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px, transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px, rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px, transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px, rgba(0, 0, 0, 0.04) 130px),
+
+    repeating-linear-gradient(to right,
+      transparent 25px,
+      rgba(0, 0, 0, 0.04) 26px, rgba(0, 0, 0, 0.04) 26px,
+      transparent 27px, transparent 51px, 
+      rgba(0, 0, 0, 0.04) 52px, rgba(0, 0, 0, 0.04) 52px,
+      transparent 53px, transparent 77px, 
+      rgba(0, 0, 0, 0.04) 78px, rgba(0, 0, 0, 0.04) 78px,
+      transparent 79px, transparent 103px, 
+      rgba(0, 0, 0, 0.04) 104px, rgba(0, 0, 0, 0.04) 104px,
+      transparent 105px, transparent 129px, 
+      rgba(0, 0, 0, 0.04) 130px, rgba(0, 0, 0, 0.04) 130px);
+  z-index: -1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ノートエリア */
+.nt-wrap {
+  margin: 20px auto;
+  position: relative;
+  width: 300px;
+  z-index: 2;
+}
+
+/* ノートの切り取り領域 */
+.nt-clip {
+  position: relative;
+  width: 350px;
+  overflow: hidden;
+}
+
+/* 回転 */
+.nt-rot {
+  transform: rotate(-2deg);
+  transform-origin: left top;
+  width: fit-content;
+}
+
+/* ノート本体ボックス */
+.nt-box {
+  position: relative;
+  width: 300px;
+  margin-top: 10px;
+  padding: 42px 36px 60px 30px;
+  background-color: #fefefe;
+  box-sizing: border-box;
+  font-family: 'Zen Kurenaido';
+  font-size: 13px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+    background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(128, 128, 128, 0.2),
+    rgba(128, 128, 128, 0.2) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+  background-size: 100% 20px;
+}
+
+/* ノート装飾 */
+.nt-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 100%;
+  background-color: #fefefe;
+    background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(128, 128, 128, 0.2),
+      rgba(128, 128, 128, 0.2) 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.2) 0.4px, transparent 0.4px),
+    linear-gradient(to bottom, rgba(128, 128, 128, 0.2) 0.4px, transparent 0.4px);
+  background-size: 100% 20px, 0.4px 20px, 0.4px 20px;
+}
+
+/* グラデーション影 */
+.nt-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent 30%);
+  z-index: 0;
+}
+
+/* 行エリア */
+.nt-line {
+  height: 19.5px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.nt-line p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: 'Zen Kurenaido';
+  line-height: 20px;
+}
+
+
+/* メッセージボックス */
+.mb-w {
+  margin: 0 auto;
+  z-index: 2;
+  font-family: 'DotGothic16';
+}
+
+/* メッセージボックス本体 */
+.mb {
+  max-width: 180px;
+  width: 100%;
+  border: 3px solid #666;
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 6px 12px rgba(255, 255, 255, 0.5),
+    inset 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* メッセージヘッダー */
+.mb-hd {
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 0.6rem;
+  font-family: 'DotGothic16';
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* メッセージタイトル */
+.mb-ttl {
+  background-color: #235BC8;
+  color: #fff;
+  padding: 8px 12px;
+  gap: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 行要素の共通スタイル */
+.line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ラベルのスタイル */
+.label {
+  background-color: #fff;
+  color: #235BC8;
+  padding: 3px 8px;
+  font-size: 0.65rem;
+  font-family: 'DotGothic16';
+}
+
+/* テキストのスタイル */
+.text {
+  font-size: 0.65rem;
+  font-family: 'DotGothic16';
+  color: #fff;
+}
+
+/* メッセージ本文 */
+.mb-bd {
+  font-family: 'DotGothic16';
+  padding: 14px;
+  font-size: 0.75rem;
+  max-height: 140px;
+  color: #333;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow-y: auto;
+}
+
+.mb-bd::-webkit-scrollbar {
+  width: 4px;
+}
+.mb-bd::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+.mb-bd::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* メッセージ終わり */
+.mb-end {
+  text-align: center;
+  font-size: 0.75rem;
+  font-family: 'DotGothic16';
+  color: #333;
+}
+
+/* メッセージボタン群 */
+.mb-btns {
+  font-family: 'DotGothic16';
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  gap: 6px;
+  background-color: #e0e0e0;
+  border-top: 1px solid #ccc;
+}
+
+/* ボタン */
+.mb-btn {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.5rem;
+  font-family: 'DotGothic16';
+  border-radius: 20px;
+  background-color: #235BC8;
+  color: #fff;
+  text-align: center;
+  user-select: none;
+}
+
+/* メニューボタン */
+.mb-btn.menu {
+  font-family: 'DotGothic16';
+  flex: 1.2;
+}
+
+/* グレーボタン */
+.mb-btn.gray {
+  font-family: 'DotGothic16';
+  background-color: #aaa;
+}
+
+/* プレイヤー本体の画面エリア */
+.screen {
+  background: #000;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #000;
+  padding: 8px;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-family: 'DotGothic16';
+  line-height: 1.1;
+  box-sizing: border-box;
+  color: #d5d5d5;
+  box-shadow:
+  3px 6px 25px rgba(255, 255, 255, 0.5),
+  inset 3px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 0.7rem;
+  font-family: 'DotGothic16';
+  border-bottom: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 2px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.title-text {
+  white-space: nowrap;
+  display: inline-block;
+  padding-left: 20%;
+  animation: scroll-left 12s linear infinite;
+}
+
+/* アイコン付き行（アルバム・アーティスト・ジャンル） */
+.line {
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-family: 'DotGothic16';
+  gap: 3px;
+  line-height: 1.1;
+}
+
+.line.album::before { content: '💿'; }
+.line.artist::before { content: '👤'; }
+.line.genre::before { content: '🎶'; }
+
+.count {
+  margin-top: 4px;
+  font-size: 0.55rem;
+  font-family: 'DotGothic16';
+}
+
+/* シークバー */
+.bar {
+  position: relative;
+  height: 4px;
+  width: 90%;
+  margin: 4px auto;
+  border: 1px solid #d5d5d5;
+  background: #000;
+  box-sizing: border-box;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 33%;
+  background: #fff;
+}
+
+/* フッター（再生・バッテリー） */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.left {
+  font-family: 'DotGothic16';
+  display: flex;
+  gap: 4px;
+  font-size: 0.6rem;
+  align-items: center;
+}
+
+.left a.play {
+  font-size: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.right {
+  font-family: 'DotGothic16';
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 0.6rem;
+}
+
+/* バッテリーアイコン */
+.battery {
+  width: 14px;
+  height: 8px;
+  border: 1px solid #d5d5d5;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 1.5px;
+  width: 2px;
+  height: 5px;
+  background: #fff;
+  border-radius: 1px;
+}
+
+.level {
+  background: #fff;
+  width: 60%;
+  height: 100%;
+}
